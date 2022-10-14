@@ -171,6 +171,7 @@ class PointLight(object):
 
         return shadow_intensity
 
+# Referencia: https://webglfundamentals.org/webgl/lessons/webgl-3d-lighting-spot.html
 
 class SpotLight(object):
     def __init__(self, size, point, lDir=[0, 0, 0], constant = 1.0, linear = 0.1, quad = 0.05, color = (1,1,1)):
