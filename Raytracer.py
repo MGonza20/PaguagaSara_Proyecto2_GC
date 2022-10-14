@@ -25,11 +25,11 @@ marble5 = Material( diffuse = (171/255, 240/255, 1), texture = Texture("colored-
 rtx = Raytracer(width, height)
 # rtx.envMap = Texture("parkingLot.bmp")
 
-# rtx.lights.append( AmbientLight(intensity = 0.1 ))
+rtx.lights.append( AmbientLight(intensity = 0.1 ))
 # rtx.lights.append( DirectionalLight(direction = (-1,-1,-1), intensity = 0.8 ))
-rtx.lights.append( SpotLight(size=40, point = (-15, 0, 0)))
+rtx.lights.append( SpotLight(size=20, point = (0, 0, 0)))
 
-rtx.scene.append(Plane(position = (0, 0, -100), normal = (0, 0, 1), material = wallMat))
+rtx.scene.append(Plane(position = (0, 0, -100), normal = (0, 0, 1), material = wallMat  ))
 
 # rtx.scene.append(Triangle(A = (-0.5-1.5,0+0.5-0.5,-4), B = (1-1.5,1.7+0.5-0.5,-4), C = (0-1.5, 1.5+0.5-0.5, -4), material = marble5))
 # rtx.scene.append(Triangle(A = (-1*(-0.5-1.5)-0.5 +0.35 ,-1*(0+0.5-1)-0.5-0.25,-4), B = (-1*(1-1.5)-0.5 + 0.35, -1*(1.7+0.5-1)-0.5-0.25,-4), C = (-1*(0-1.5)+0.25 + 0.35, -1*(1.5+0.5-1)-0.5-0.25, -4), material = wallMat))

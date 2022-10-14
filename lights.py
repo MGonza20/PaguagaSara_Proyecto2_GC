@@ -174,22 +174,22 @@ class PointLight(object):
 # Referencia: https://webglfundamentals.org/webgl/lessons/webgl-3d-lighting-spot.html
 
 class SpotLight(object):
-    def __init__(self, size, point, lDir=[0, 0, 0], constant = 1.0, linear = 0.1, quad = 0.05, color = (1,1,1)):
+    def __init__(self, size, point, lDir=[0, 0, -1], constant = 1.0, linear = 0.1, quad = 0.05, color = (1,1,1)):
         self.point = point
         self.constant = constant
         self.linear = linear
         self.quad = quad
         self.color = color
         self.lightType = SPOT_LIGHT
-        self.lDir = lDir
-        # self.size = (size * pi)/180
-        self.size = size
+        self.lDir = normV(lDir)
+        self.size = cos((size * pi)/180)
+        # self.size = size
 
     def getDiffuseColor(self, intersect, raytracer):
         light_dir = subtractVList(self.point, intersect.point)
         light_dir = normV(light_dir)
 
-        attenuation = 1.0
+        attenuation = 1.0/15
         intensity = 0
         negLightDir = [-1 * self.lDir[0], -1 * self.lDir[1], -1 * self.lDir[2]]
         fromDir = dotProduct(light_dir, negLightDir) 
