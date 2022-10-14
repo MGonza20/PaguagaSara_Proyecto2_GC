@@ -1,11 +1,13 @@
 
 from multiprocessing import shared_memory
 from mathLib import *
+from math import pi, cos
 
 
 DIR_LIGHT = 0
 POINT_LIGHT = 1
 AMBIENT_LIGHT = 2
+SPOT_LIGHT = 3
 
 def reflectVector(normal, direction):
     reflect = 2 * dotProduct(normal, direction)
@@ -153,6 +155,73 @@ class PointLight(object):
         specColor = [spec_intensity * self.color[0],
                      spec_intensity * self.color[1],
                      spec_intensity * self.color[2]]
+
+        return specColor
+
+    def getShadowIntensity(self, intersect, raytracer):
+        light_dir = subtractVList(self.point, intersect.point)
+        light_distance = norm(light_dir)
+        light_dir = [light_dir[0] / light_distance, light_dir[1] / light_distance, light_dir[2] / light_distance]
+
+        shadow_intensity = 0
+        shadow_intersect = raytracer.scene_intersect(intersect.point, light_dir, intersect.sceneObj)
+        if shadow_intersect:
+            if shadow_intersect.distance < light_distance:
+                shadow_intensity = 1
+
+        return shadow_intensity
+
+
+class SpotLight(object):
+    def __init__(self, size, point, lDir=[0, 0, 0], constant = 1.0, linear = 0.1, quad = 0.05, color = (1,1,1)):
+        self.point = point
+        self.constant = constant
+        self.linear = linear
+        self.quad = quad
+        self.color = color
+        self.lightType = SPOT_LIGHT
+        self.lDir = lDir
+        # self.size = (size * pi)/180
+        self.size = size
+
+    def getDiffuseColor(self, intersect, raytracer):
+        light_dir = subtractVList(self.point, intersect.point)
+        light_dir = normV(light_dir)
+
+        attenuation = 1.0
+        intensity = 0
+        negLightDir = [-1 * self.lDir[0], -1 * self.lDir[1], -1 * self.lDir[2]]
+        fromDir = dotProduct(light_dir, negLightDir) 
+
+        if (fromDir >= self.size):
+            intensity = dotProduct(intersect.normal, light_dir) * attenuation
+            intensity = float(max(0, intensity))            
+                                                        
+        diffuseColor = [intensity * self.color[0],
+                        intensity * self.color[1],
+                        intensity * self.color[2]]
+
+        return diffuseColor
+
+    def getSpecColor(self, intersect, raytracer):
+        light_dir = subtractVList(self.point, intersect.point)
+        light_dir = normV(light_dir)
+
+        reflect = reflectVector(intersect.normal, light_dir)
+
+        view_dir = subtractVList( raytracer.camPosition, intersect.point)
+        view_dir = normV(view_dir)
+
+        attenuation = 1.0
+        specColor = [0, 0, 0]
+        negLightDir = [-1 * self.lDir[0], -1 * self.lDir[1], -1 * self.lDir[2]]
+        fromDir = dotProduct(light_dir, negLightDir) 
+        
+        spec_intensity = attenuation * max(0, dotProduct(view_dir, reflect)) ** intersect.sceneObj.material.spec
+        if spec_intensity:
+            specColor = [spec_intensity * self.color[0],
+                        spec_intensity * self.color[1],
+                        spec_intensity * self.color[2]]
 
         return specColor
 
