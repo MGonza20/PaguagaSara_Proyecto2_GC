@@ -27,7 +27,7 @@ rtx = Raytracer(width, height)
 
 rtx.lights.append( AmbientLight(intensity = 0.1 ))
 # rtx.lights.append( DirectionalLight(direction = (-1,-1,-1), intensity = 0.8 ))
-rtx.lights.append( SpotLight(size=20, point = (0, 0, 0)))
+rtx.lights.append( SpotLight(size=20, point = (0, 0, 0), attenuation=1/2))
 
 rtx.scene.append(Plane(position = (0, 0, -100), normal = (0, 0, 1), material = wallMat  ))
 
