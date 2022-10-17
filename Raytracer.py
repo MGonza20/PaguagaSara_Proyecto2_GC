@@ -22,12 +22,12 @@ marble5 = Material( diffuse = (171/255, 240/255, 1), texture = Texture("colored-
 
 table = Material(diffuse = (67/255, 63/255, 60/255), spec = 30, matType = OPAQUE)
 porcelain = Material(diffuse= (218/255, 217/255, 215/255), spec = 100, matType = OPAQUE)
-coffee = Material(diffuse = (87/255,69/255,62/255), spec = 64, ior = 1.3354, matType= TRANSPARENT)
+coffee = Material(diffuse = (176/255, 140/255, 119/255), spec = 64, ior = 1.3354, matType= TRANSPARENT)
 spoon = Material(diffuse = (136/255, 132/255, 131/255), spec = 20, matType= REFLECTIVE)
 neon = Material(diffuse = (6/255,1,1/255), spec = 64, ior = 1.3354, matType= TRANSPARENT)
 
 rtx = Raytracer(width, height)
-# rtx.envMap = Texture("resources/envMap/brown_photostudio.bmp")
+rtx.envMap = Texture("resources/envMap/brown_photostudio.bmp")
 
 rtx.lights.append( AmbientLight(intensity = 0.5 ))
 rtx.lights.append( DirectionalLight(direction = (-1,-1,-1), intensity = 1 ))
@@ -36,7 +36,7 @@ rtx.lights.append( DirectionalLight(direction = (-1,-1,-1), intensity = 1 ))
 # rtx.lights.append( SpotLight(size=5, point = (0, 0, 0), lDir=[0, 0, -1], attenuation=1/2))
 
 # rtx.scene.append(Triangle(A = (-0.5-1.5,0+0.5-0.5,-4), B = (1-1.5,1.7+0.5-0.5,-4), C = (0-1.5, 1.5+0.5-0.5, -4), material = marble5))
-# rtx.scene.append( Disk(position = (0,-1.5,-4), radius = 1.5, normal = (0,1,0), material = table ))
+rtx.scene.append( Disk(position = (0,-1.5,-4), radius = 1.5, normal = (0,1,0), material = table ))
 
 # rtx.scene.append( AABB(position = (0,-3,-7), size = (2,2,2), material = marble))
 
@@ -51,11 +51,11 @@ rtx.lights.append( DirectionalLight(direction = (-1,-1,-1), intensity = 1 ))
 # rtx.scene.append(Triangle(A = (-1*(-0.5-1.5)-0.5 +0.35 ,-1*(0+0.5-1)-0.5-0.25,-4), B = (-1*(1-1.5)-0.5 + 0.35, -1*(1.7+0.5-1)-0.5-0.25,-4), C = (-1*(0-1.5)+0.25 + 0.35, -1*(1.5+0.5-1)-0.5-0.25, -4), material = wallMat))
 # rtx.scene.append(Triangle(A = (-1 -0.1,0-0.5,-3.5), B = (1 -0.1,0-0.5,-3.5), C = (0 -0.1, 1.5-0.5, -3.5), material = wallMat))
 
-# rtx.glLoadModel("resources/models/coffeeCup/coffeeCup6.obj",
-#                  translate = V3(0, -1.4, -3.5),
-#                  scale = V3(0.5, 0.5, 0.5),
-#                  rotate = V3(7,0,0),
-#                  material = porcelain)
+rtx.glLoadModel("resources/models/coffeeCup/coffeeCup6.obj",
+                 translate = V3(0, -1.4, -3.5),
+                 scale = V3(0.5, 0.5, 0.5),
+                 rotate = V3(7,0,0),
+                 material = porcelain)
 
 rtx.glLoadModel("resources/models/coffeePlate/coffeePlate3.obj",
                  translate = V3(0, -1.5, -3.5),
@@ -70,15 +70,14 @@ rtx.glLoadModel("resources/models/cookie/cookie.obj",
                  rotate = V3(0,40,0),
                  material = Material(texture = Texture("resources/models/cookie/cookieTex.bmp")))
 
-# rtx.glLoadModel("resources/models/coffeeSpoon/coffeeSpoon7.obj",
-#                  translate = V3(0,0,0),
-#                  scale = V3(5, 5, 5),
-#                  rotate = V3(0,0,0))
+rtx.glLoadModel("resources/models/coffeeSpoon/coffeeSpoon9.obj",
+                 translate = V3(1.65-0.35, -4.1+0.35, -1.65-0.2),
+                 scale = V3(0.8,0.8,0.8),
+                 rotate = V3(0,80,0),
+                 material = spoon)
 
 
-
-
-# rtx.scene.append( Disk(position = (0,-0.6,-3.5), radius = 0.5, normal = (0,1,0), material = coffee ))
+rtx.scene.append( Disk(position = (0,-0.6,-3.5), radius = 0.5, normal = (0,1,0), material = coffee ))
 
 
 rtx.glRender()
