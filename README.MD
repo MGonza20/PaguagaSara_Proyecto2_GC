@@ -3,7 +3,7 @@
 
 En el presente proyecto se buscó demostrar los conocimientos adquiridos durante la segunda parte del curso Gráficas por Computadora.
 
-Se buscó entregar un Ray Tracer simple en donde se trató de recrear la escena seleccionada para el proyecto por medio de figuras, siendo estas discos y triángulos. Tomando también esto en cuenta se cargaron distintos modelos obj, los cuales eran conformados por triángulos. 
+Se buscó entregar un Ray Tracer simple en donde se trató de recrear la escena seleccionada para el proyecto por medio de figuras, siendo estas discos y triángulos. Tomando también esto en cuenta se cargaron distintos modelos obj los cuales eran conformados por triángulos. 
 
 Se renderizaron más de 1000 figuras y se aplicaron 4 materiales en donde uno era refractivo, otro material era reflectivo y los demás materiales eran opacos. 
 
