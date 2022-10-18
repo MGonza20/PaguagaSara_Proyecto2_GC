@@ -7,7 +7,7 @@ Se buscó entregar un Ray Tracer simple en donde se trató de recrear la escena 
 
 Se renderizaron más de 1000 figuras y se aplicaron 4 materiales en donde uno era refractivo, otro material era reflectivo y los demás materiales eran opacos. 
 
-Finalmente cabe mencionar que se aplicaron distintas luces en la escena, tal como: AmbientLight, DirectionalLight y SpotLight, y se renderizó un Enviroment Map para darle fondo a la escena.
+Finalmente cabe mencionar que se aplicaron distintas luces en la escena, tal como: AmbientLight, DirectionalLight y SpotLight, y se renderizó un Enviroment Map para darle un fondo a la escena.
 
 ## Referencia/Escena seleccionada
 
